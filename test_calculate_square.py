@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from langchain.tools import tool
-load_dotenv()
+load_dotenv("lca-lc-foundations/.env")
 
 @tool
 def square_root(x:float) -> float:
