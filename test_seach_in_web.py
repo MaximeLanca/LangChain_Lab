@@ -5,7 +5,7 @@ from langchain.messages import HumanMessage
 load_dotenv("lca-lc-foundations/.env")
 
 agent = create_agent(model = "gpt-5-nano")
-question = HumanMessage(content =  "What is the capital of France ?")
+question = HumanMessage(content =  "How up to date is your training knowledge ?")
 response = agent.invoke(
     {"messages": [question]}
 )
