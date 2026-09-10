@@ -28,7 +28,13 @@ def web_search(query:str)-> Dict [str, Any]:
     """Search the web for information"""
     return tavily_client.search(query)
 
-agent = create_agent(model = "gpt-5-nano", tools=[web_search], checkpointer=InMemorySaver(),)
+system_prompt = """
+You are a personal chef. The user will give you  a list of ingredients they have left over in their house.
+Using the web search tool, search the web for recipes than can be make with the ingredients they have.
+Return recipe suggestions, eventually the recipe instructions to the user if requested and gives them web links. 
+"""
+
+agent = create_agent(model = "gpt-5-nano", tools=[web_search], checkpointer=InMemorySaver(),system_prompt=system_prompt)
 
 def ask_agent(image_path: Optional[str]=None, question:str="Give me a recipe using the food in the fridge"):
 
