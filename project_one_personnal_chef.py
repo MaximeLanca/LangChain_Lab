@@ -30,7 +30,7 @@ def web_search(query:str)-> Dict [str, Any]:
 
 agent = create_agent(model = "gpt-5-nano", tools=[web_search], checkpointer=InMemorySaver(),)
 
-def ask_agent(image_path: Optional[str]=None, question:str="Tell me about this capital"):
+def ask_agent(image_path: Optional[str]=None, question:str="Give me a recipe using the food in the fridge"):
 
     content = [{"type":"text", "text":question}]
 
@@ -46,4 +46,4 @@ def ask_agent(image_path: Optional[str]=None, question:str="Tell me about this c
     print(response['messages'][-1].content)
 
 if __name__ == "__main__":
-    ask_agent("/Users/maxime/Desktop/img.png")
+    ask_agent("/Users/maxime/Desktop/conservar-alimentos.png")
