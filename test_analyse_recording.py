@@ -5,22 +5,26 @@ import io
 import time
 from tqdm import tqdm
 
-#Recording settings
-duration = 5 #seconds
-sample_rate = 44100
 
-print("Recording...")
-audio = sd.rec(int(duration*sample_rate, channels=1))
+def record_audio_base64(duration: int = 5, sample_rate: int = 44100) -> str:
+    
+    print("Recording...")
+    audio = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1)
 
-#Progress bar for the duration
-for _ in tqdm[int](range(duration*10)): #update 10x per second
-    time.sleep(0.1)
-sd.wait()
-print("Done.")
+    
+    for _ in tqdm(range(duration * 10)):
+        time.sleep(0.1)
+    sd.wait()
+    print("Done.")
 
-#Write WAV to an in-memory buffer
-buf = io.ByteIO()
-write(buf, sample_rate, audio)
-wav_bytes = buf. getvalue()
+    
+    buf = io.BytesIO()
+    write(buf, sample_rate, audio)
+    wav_bytes = buf.getvalue()
 
-aud_64 = base64.b64encode(wav_bytes).decode("utf-8")
+    return base64.b64encode(wav_bytes).decode("utf-8")
+
+
+if __name__ == "__main__":
+    aud_64 = record_audio_base64()
+    print(f"Base64 length: {len(aud_64)} caractères")
